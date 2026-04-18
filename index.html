@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>ব্লগিং গাইড বুক | ইয়াকুব মিজি অনিম</title>
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <!-- AOS Animation -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', 'Segoe UI', 'Noto Sans Bengali', system-ui, sans-serif;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    /* ========== লাইট মোড ========== */
+    :root {
+      --bg-primary: #fefce8;
+      --bg-secondary: #ffffff;
+      --card-bg: #ffffff;
+      --text-primary: #1e293b;
+      --text-secondary: #475569;
+      --border: #e2e8f0;
+      --accent: #eab308;
+      --accent-dark: #ca8a04;
+      --accent-light: #fef9c3;
+      --accent-glow: rgba(234,179,8,0.1);
+      --gradient-1: linear-gradient(135deg, #eab308, #ca8a04);
+      --gradient-2: linear-gradient(135deg, #f59e0b, #eab308);
+      --shadow: 0 4px 15px -3px rgba(0,0,0,0.05);
+      --header-bg: rgba(255,255,255,0.85);
+    }
+
+    /* ========== ডার্ক মোড ========== */
+    body.dark {
+      --bg-primary: #0f172a;
+      --bg-secondary: #1e293b;
+      --card-bg: #1e293b;
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --border: #334155;
+      --accent: #fbbf24;
+      --accent-dark: #f59e0b;
+      --accent-light: #1e293b;
+      --accent-glow: rgba(251,191,36,0.1);
+      --gradient-1: linear-gradient(135deg, #fbbf24, #f59e0b);
+      --gradient-2: linear-gradient(135deg, #f59e0b, #eab308);
+      --shadow: 0 4px 15px -3px rgba(0,0,0,0.3);
+      --header-bg: rgba(30,41,59,0.92);
+    }
+
+    body {
+      background: var(--bg-primary);
+      color: var(--text-primary);
+    }
+
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem 3rem;
+    }
+
+    /* হেডার */
+    header {
+      background: var(--header-bg);
+      backdrop-filter: blur(16px);
+      border-radius: 2rem;
+      padding: 0.8rem 2rem;
+      margin-bottom: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 12px;
+      z-index: 100;
+    }
+
+    .logo h1 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      background: var(--gradient-1);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .logo span {
+      font-size: 0.7rem;
+      color: var(--accent);
+    }
+
+    .menu {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .menu a {
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-weight: 500;
+      transition: 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.9rem;
+    }
+
+    .menu a:hover {
+      color: var(--accent);
+    }
+
+    .theme-toggle {
+      background: var(--accent-light);
+      border: 1px solid var(--border);
+      border-radius: 2rem;
+      padding: 0.5rem 1.2rem;
+      cursor: pointer;
+      color: var(--accent);
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      font-weight: 500;
+    }
+
+    /* হিরো */
+    .hero {
+      text-align: center;
+      padding: 3rem 2rem;
+      background: var(--bg-secondary);
+      border-radius: 2rem;
+      margin-bottom: 2rem;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+    }
+
+    .gradient-text {
+      background: var(--gradient-1);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      color: var(--text-secondary);
+      max-width: 700px;
+      margin: 1rem auto 0;
+      font-size: 1rem;
+    }
+
+    /* সেকশন */
+    .section {
+      margin: 3rem 0;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-header i {
+      font-size: 1.8rem;
+      color: var(--accent);
+    }
+
+    .section-header h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+    }
+
+    /* গ্রিড */
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.8rem;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 1.8rem;
+    }
+
+    /* কার্ড */
+    .card {
+      background: var(--card-bg);
+      border-radius: 1.5rem;
+      padding: 1.6rem;
+      border: 1px solid var(--border);
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow);
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent);
+    }
+
+    .card-icon {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+    }
+
+    .card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .card p {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    .step-list {
+      margin-top: 1rem;
+      padding-left: 1.2rem;
+    }
+
+    .step-list li {
+      margin: 0.5rem 0;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+    }
+
+    .tip-box {
+      background: var(--accent-light);
+      border-left: 4px solid var(--accent);
+      padding: 1rem;
+      border-radius: 1rem;
+      margin-top: 1rem;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .tag {
+      background: var(--accent-light);
+      padding: 0.2rem 0.8rem;
+      border-radius: 2rem;
+      font-size: 0.7rem;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .platform-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .platform-item {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 1rem;
+      text-align: center;
+      transition: 0.2s;
+    }
+
+    .platform-item i {
+      font-size: 1.8rem;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .platform-item span {
+      display: block;
+      font-size: 0.8rem;
+    }
+
+    .instructor-card {
+      background: var(--gradient-1);
+      border-radius: 1.5rem;
+      padding: 1.8rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      color: white;
+    }
+
+    .contact-icons {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .contact-icon {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      padding: 0.7rem 1.8rem;
+      border-radius: 3rem;
+      text-decoration: none;
+      color: var(--text-primary);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    .contact-icon:hover {
+      border-color: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    .creator {
+      text-align: center;
+      margin-top: 3rem;
+      padding: 1.5rem;
+      background: var(--accent-light);
+      border-radius: 1.5rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      border-top: 1px solid var(--border);
+      margin-top: 2rem;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+
+    @media (max-width: 768px) {
+      .container { padding: 0.8rem 1rem; }
+      .hero h1 { font-size: 1.6rem; }
+      .section-header h2 { font-size: 1.3rem; }
+      header { flex-direction: column; gap: 0.8rem; text-align: center; }
+      .instructor-card { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header data-aos="fade-down">
+    <div class="logo">
+      <h1><i class="fas fa-book-open"></i> ব্লগিং গাইড বুক</h1>
+      <span>সফল ব্লগার হওয়ার সম্পূর্ণ নির্দেশিকা</span>
+    </div>
+    <div class="menu">
+      <a href="#home"><i class="fas fa-home"></i> হোম</a>
+      <a href="#start"><i class="fas fa-rocket"></i> শুরু</a>
+      <a href="#platform"><i class="fas fa-globe"></i> প্ল্যাটফর্ম</a>
+      <a href="#monetize"><i class="fas fa-dollar-sign"></i> আয়</a>
+      <a href="#instructor"><i class="fas fa-user"></i> প্রশিক্ষক</a>
+      <button class="theme-toggle" id="darkModeToggle">
+        <i class="fas fa-moon"></i> <span>ডার্ক</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- হিরো -->
+  <div id="home" class="hero" data-aos="fade-up">
+    <h1><span class="gradient-text">ব্লগিং গাইড বুক</span></h1>
+    <p>ব্লগিং শুরু থেকে ট্রাফিক আনা, কন্টেন্ট ক্রিয়েশন, এসইও এবং আয় করা পর্যন্ত সম্পূর্ণ নির্দেশিকা</p>
+  </div>
+
+  <!-- ব্লগিং শুরু -->
+  <div id="start" class="section">
+    <div class="section-header" data-aos="fade-right">
+      <i class="fas fa-rocket"></i>
+      <h2>🚀 কিভাবে ব্লগিং শুরু করবেন?</h2>
+    </div>
+    <div class="grid-2">
+      <div class="card" data-aos="zoom-in" data-aos-delay="100">
+        <div class="card-icon"><i class="fas fa-lightbulb"></i></div>
+        <h3>স্টেপ ১: বিষয় নির্বাচন (নিচ)</h3>
+        <p>আপনি কোন বিষয়ে লিখবেন? আপনার আগ্রহ ও দক্ষতার ক্ষেত্র বেছে নিন। যেমন: টেকনোলজি, ফুড, ট্রাভেল, লাইফস্টাইল, এডুকেশন, হেলথ ইত্যাদি।</p>
+        <div class="tag-list">
+          <span class="tag">টেকনোলজি</span>
+          <span class="tag">ফুড ব্লগ</span>
+          <span class="tag">ট্রাভেল</span>
+          <span class="tag">লাইফস্টাইল</span>
+        </div>
+      </div>
+      <div class="card" data-aos="zoom-in" data-aos-delay="150">
+        <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+        <h3>স্টেপ ২: ব্লগ প্ল্যাটফর্ম নির্বাচন</h3>
+        <p>বিনামূল্যে ও পেইড প্ল্যাটফর্মের মধ্যে বেছে নিন। শুরুতে বিনামূল্যে শুরু করে পরে নিজের ডোমেইন নিন।</p>
+        <div class="tag-list">
+          <span class="tag">Blogger</span>
+          <span class="tag">WordPress</span>
+          <span class="tag">Medium</span>
+          <span class="tag">Ghost</span>
+        </div>
+      </div>
+      <div class="card" data-aos="zoom-in" data-aos-delay="200">
+        <div class="card-icon"><i class="fas fa-pen-fancy"></i></div>
+        <h3>স্টেপ ৩: প্রথম পোস্ট লেখা</h3>
+        <p>আপনার প্রথম ব্লগ পোস্ট লিখুন। পাঠকদের সাথে নিজের পরিচয় করিয়ে দিন। নিয়মিত পোস্ট করার অভ্যাস গড়ুন।</p>
+        <div class="tip-box">
+          <i class="fas fa-lightbulb"></i> <strong>টিপ:</strong> সপ্তাহে অন্তত ১-২টি মানসম্পন্ন পোস্ট লেখার চেষ্টা করুন।
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ব্লগিং প্ল্যাটফর্ম -->
+  <div id="platform" class="section">
+    <div class="section-header" data-aos="fade-right">
+      <i class="fas fa-globe"></i>
+      <h2>🌐 জনপ্রিয় ব্লগিং প্ল্যাটফর্ম</h2>
+    </div>
+    <div class="platform-grid">
+      <div class="platform-item" data-aos="fade-up" data-aos-delay="50">
+        <i class="fab fa-wordpress"></i>
+        <span>WordPress.org</span>
+        <p style="font-size: 0.7rem; margin-top: 5px;">পেশাদার, কাস্টমাইজেবল</p>
+      </div>
+      <div class="platform-item" data-aos="fade-up" data-aos-delay="100">
+        <i class="fab fa-blogger"></i>
+        <span>Blogger</span>
+        <p style="font-size: 0.7rem;">ফ্রি, গুগল দ্বারা</p>
+      </div>
+      <div class="platform-item" data-aos="fade-up" data-aos-delay="150">
+        <i class="fab fa-medium"></i>
+        <span>Medium</span>
+        <p style="font-size: 0.7rem;">বিল্ট-ইন অডিয়েন্স</p>
+      </div>
+      <div class="platform-item" data-aos="fade-up" data-aos-delay="200">
+        <i class="fab fa-github"></i>
+        <span>GitHub Pages</span>
+        <p style="font-size: 0.7rem;">ডেভেলপারদের জন্য</p>
+      </div>
+      <div class="platform-item" data-aos="fade-up" data-aos-delay="250">
+        <i class="fas fa-feather-alt"></i>
+        <span>Ghost</span>
+        <p style="font-size: 0.7rem;">প্রিমিয়াম, ফাস্ট</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- মানসম্পন্ন কন্টেন্ট লেখার টিপস -->
+  <div class="section">
+    <div class="section-header" data-aos="fade-right">
+      <i class="fas fa-pen-fancy"></i>
+      <h2>✍️ মানসম্পন্ন কন্টেন্ট লেখার টিপস</h2>
+    </div>
+    <div class="grid-3">
+      <div class="card" data-aos="flip-left" data-aos-delay="100">
+        <i class="fas fa-heading" style="font-size: 1.8rem; color: var(--accent);"></i>
+        <h3>আকর্ষণীয় শিরোনাম</h3>
+        <p>শিরোনাম পাঠককে আপনার পোস্টে ক্লিক করতে আগ্রহী করে তুলবে। সংখ্যা, প্রশ্ন, হাউ-টু শিরোনাম বেশি কাজ করে।</p>
+        <div class="tag-list"><span class="tag">হাউ-টু</span><span class="tag">লিস্টিকল</span><span class="tag">প্রশ্নবোধক</span></div>
+      </div>
+      <div class="card" data-aos="flip-left" data-aos-delay="150">
+        <i class="fas fa-image" style="font-size: 1.8rem; color: var(--accent);"></i>
+        <h3>ভিজুয়াল কন্টেন্ট</h3>
+        <p>ছবি, ইনফোগ্রাফিক, ভিডিও ব্যবহার করুন। ভিজুয়াল কন্টেন্ট পাঠকদের আগ্রহ ধরে রাখে এবং শেয়ার করার সম্ভাবনা বাড়ায়।</p>
+        <div class="tag-list"><span class="tag">ক্যানভা</span><span class="tag">আনস্প্ল্যাশ</span><span class="tag">পেক্সেল</span></div>
+      </div>
+      <div class="card" data-aos="flip-left" data-aos-delay="200">
+        <i class="fas fa-search" style="font-size: 1.8rem; color: var(--accent);"></i>
+        <h3>এসইও অপটিমাইজেশন</h3>
+        <p>কীওয়ার্ড রিসার্চ, মেটা ট্যাগ, ইন্টারনাল লিংকিং — গুগলে র্যাঙ্ক করার জন্য এসইও জরুরি।</p>
+        <div class="tag-list"><span class="tag">কীওয়ার্ড</span><span class="tag">মেটা</span><span class="tag">ব্যাকলিংক</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ট্রাফিক বাড়ানোর উপায় -->
+  <div class="section">
+    <div class="section-header" data-aos="fade-right">
+      <i class="fas fa-chart-line"></i>
+      <h2>📈 ট্রাফিক বাড়ানোর উপায়</h2>
+    </div>
+    <div class="grid-2">
+      <div class="card" data-aos="fade-up" data-aos-delay="100">
+        <i class="fab fa-google" style="font-size: 1.8rem; color: var(--accent);"></i>
+        <h3>অর্গানিক ট্রাফিক (SEO)</h3>
+        <p>গুগল থেকে ফ্রি ট্রাফিক আনার জন্য এসইও করুন। লং-টেইল কীওয়ার্ড টার্গেট করুন। কন্টেন্ট লম্বা ও বিস্তারিত রাখুন।</p>
+        <div class="tip-box">
+          <i class="fas fa-lightbulb"></i> গুগল সার্চ কনসোল ও গুগল অ্যানালিটিক্স ব্যবহার করুন।
+        </div>
+      </div>
+      <div class="card" data-aos="fade-up" data-aos-delay="150">
+        <i class="fab fa-facebook" style="font-size: 1.8rem; color: var(--accent);"></i>
+        <h3>সোশ্যাল মিডিয়া মার্কেটিং</h3>
+        <p>ফেসবুক, ইনস্টাগ্রাম, টুইটার, পিন্টারেস্টে আপনার ব্লগ পোস্ট শেয়ার করুন। গ্রুপ ও কমিউনিটিতে জয়েন করুন।</p>
+        <div class="tag-list"><span class="tag">ফেসবুক গ্রুপ</span><span class="tag">পিন্টারেস্ট</span><span class="tag">লিংকডইন</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- আয়ের উপায় -->
+  <div id="monetize" class="section">
+    <div class="section-header" data-aos="fade-right">
+      <i class="fas fa-dollar-sign"></i>
+      <h2>💰 ব্লগিং থেকে আয়ের উপায়</h2>
+    </div>
+    <div class="grid-3">
+      <div class="card" data-aos="zoom-in" data-aos-delay="100">
+        <i class="fas fa-ad" style="font-size: 1.8rem; color: var(--accent);"></i>
+        <h3>গুগল অ্যাডসেন্স</h3>
+        <p>আপনার ব্লগে বিজ্ঞাপন দেখিয়ে আয় করুন। প্রতি ১০০০ ভিজিটরে $1-5 পর্যন্ত আয় হতে পারে।</p>
+        <div class="tag-list"><span class="tag">AdSense</span><span class="tag">Media.net</span><span class="tag">Ezoic</span></div>
+      </div>
+      <div class="card" data-aos="zoom-in" data-aos-delay="150">
+        <i class="fas fa-handshake" style="font-size: 1.8rem; color: var(--accent);"></i>
+        <h3>অ্যাফিলিয়েট মার্কেটিং</h3>
+        <p>অন্যের পণ্য প্রমোট করে কমিশন আয় করুন। Amazon, ClickBank, Daraz অ্যাফিলিয়েট প্রোগ্রাম জনপ্রিয়।</p>
+        <div class="tag-list"><span class="tag">Amazon</span><span class="tag">ClickBank</span><span class="tag">Daraz</span></div>
+      </div>
+      <div class="card" data-aos="zoom-in" data-aos-delay="200">
+        <i class="fas fa-file-alt" style="font-size: 1.8rem; color: var(--accent);"></i>
+        <h3>স্পনসরড পোস্ট</h3>
+        <p>ব্র্যান্ডগুলো আপনার ব্লগে পোস্ট করার জন্য পেমেন্ট করে। ট্রাফিক বাড়লে স্পনসর পাওয়া সহজ হয়।</p>
+        <div class="tip-box">
+          <i class="fas fa-lightbulb"></i> ১০,০০০ মাসিক ভিজিটর হলে স্পনসর পাওয়া শুরু হয়।
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ব্লগিং টুলস -->
+  <div class="section">
+    <div class="section-header" data-aos="fade-right">
+      <i class="fas fa-toolbox"></i>
+      <h2>🛠️ প্রয়োজনীয় ব্লগিং টুলস</h2>
+    </div>
+    <div class="grid-3">
+      <div class="card" data-aos="fade-up" data-aos-delay="100">
+        <i class="fas fa-keyboard"></i>
+        <h3>কন্টেন্ট টুলস</h3>
+        <p>গ্রামারলি, হেমিংওয়ে, ক্যানভা, আনস্প্ল্যাশ</p>
+      </div>
+      <div class="card" data-aos="fade-up" data-aos-delay="150">
+        <i class="fas fa-chart-simple"></i>
+        <h3>এসইও টুলস</h3>
+        <p>Yoast SEO, Rank Math, Ubersuggest, Ahrefs</p>
+      </div>
+      <div class="card" data-aos="fade-up" data-aos-delay="200">
+        <i class="fas fa-chart-line"></i>
+        <h3>অ্যানালিটিক্স টুলস</h3>
+        <p>গুগল অ্যানালিটিক্স, গুগল সার্চ কনসোল</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- প্রশিক্ষক -->
+  <div id="instructor" class="section">
+    <div class="section-header" data-aos="fade-right">
+      <i class="fas fa-chalkboard-user"></i>
+      <h2>👨‍🏫 আপনার প্রশিক্ষক</h2>
+    </div>
+    <div class="instructor-card" data-aos="fade-up">
+      <div class="instructor-icon"><i class="fas fa-user-astronaut"></i></div>
+      <div class="instructor-info">
+        <h3>ইয়াকুব মিজি অনিম</h3>
+        <p>ব্লগার, কন্টেন্ট ক্রিয়েটর ও ডিজিটাল মার্কেটার | ক্রিয়েটিভ এআই ইনস্টিটিউট</p>
+        <p>🎓 আলিম পড়াশোনা করছেন | ৩+ বছর ব্লগিং অভিজ্ঞতা | ৫০০+ আর্টিকেল লেখা</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- যোগাযোগ -->
+  <div class="section">
+    <div class="section-header" data-aos="fade-right">
+      <i class="fas fa-paper-plane"></i>
+      <h2>📬 আমার সাথে যোগাযোগ করুন</h2>
+    </div>
+    <div class="card" data-aos="fade-up">
+      <div class="contact-icons">
+        <a href="https://www.facebook.com/share/1CvjZtcC7b/" target="_blank" class="contact-icon"><i class="fab fa-facebook-f"></i> ফেসবুক</a>
+        <a href="https://wa.me/8801868656094" target="_blank" class="contact-icon"><i class="fab fa-whatsapp"></i> হোয়াটসঅ্যাপ</a>
+        <a href="mailto:yakubmizi210@gmail.com" class="contact-icon"><i class="fas fa-envelope"></i> জিমেইল</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ক্রিয়েটর -->
+  <div class="creator" data-aos="zoom-in">
+    <h3><i class="fas fa-crown"></i> এই ওয়েবসাইটটি তৈরি করেছেন</h3>
+    <p style="font-size: 1.4rem; font-weight: 700; margin: 0.3rem 0;">ইয়াকুব মিজি অনিম</p>
+    <p>ব্লগার, কন্টেন্ট ক্রিয়েটর ও ওয়েব ডেভেলপার</p>
+  </div>
+
+  <footer>
+    <p>© ২০২৬ ব্লগিং গাইড বুক — সফল ব্লগার হওয়ার সম্পূর্ণ নির্দেশিকা</p>
+    <p>তৈরি করেছেন ইয়াকুব মিজি অনিম</p>
+  </footer>
+</div>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({ duration: 600, once: true, offset: 40 });
+
+  const toggle = document.getElementById('darkModeToggle');
+  const body = document.body;
+
+  if (localStorage.getItem('theme') === 'light') {
+    body.classList.remove('dark');
+    toggle.innerHTML = '<i class="fas fa-moon"></i> <span>ডার্ক</span>';
+  } else {
+    body.classList.add('dark');
+    toggle.innerHTML = '<i class="fas fa-sun"></i> <span>লাইট</span>';
+  }
+
+  toggle.addEventListener('click', () => {
+    if (body.classList.contains('dark')) {
+      body.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+      toggle.innerHTML = '<i class="fas fa-moon"></i> <span>ডার্ক</span>';
+    } else {
+      body.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+      toggle.innerHTML = '<i class="fas fa-sun"></i> <span>লাইট</span>';
+    }
+  });
+</script>
+</body>
+</html>
